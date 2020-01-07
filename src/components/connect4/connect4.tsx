@@ -39,7 +39,7 @@ export default class Connect4 extends React.Component<IConnect4Props, IConnect4S
 
 	public render() {
 		return <div className="connect4-play-container" ref={(d) => { this.container = d }} style={ this.styleContainer() }>
-			<div style={ this.styleStatusTop() }><GameStatusTop player1Score={ this.state.game.player[0].score } player2Score={ this.state.game.player[1].score } /></div>
+			<div style={ this.styleStatusTop() }><GameStatusTop player1Score={ this.state.game.players[0].score } player2Score={ this.state.game.players[1].score } playerOn={ this.state.game.playerOn }/></div>
 
 			{ !this.state.game.isGameInPlay && <InfoBoard startGame={ this.startGame } containerHeight={ this.state.containerHeight } /> }
 

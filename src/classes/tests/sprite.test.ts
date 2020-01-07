@@ -29,4 +29,20 @@ describe('Sprite', () => {
 		expect(sprite.image).toEqual('player1.png');
 		expect(sprite.type).toEqual(SpriteTypeEnum.Player1);
 	});
+
+	it('Should update the image', () => {
+		const sprite = new Sprite(defaultConfig);
+
+		expect(sprite.image).toEqual('player1.png');
+		sprite.updateImage(ImageEnum.Player2);
+		expect(sprite.image).toEqual('player2.png');
+	})
+
+	it('Should update the type', () => {
+		const sprite = new Sprite(defaultConfig);
+
+		expect(sprite.type).toEqual(SpriteTypeEnum.Player1);
+		sprite.updateType(SpriteTypeEnum.Player2);
+		expect(sprite.type).toEqual(SpriteTypeEnum.Player2);
+	})
 });

@@ -7,7 +7,9 @@ export default class Player implements IPlayer {
 	public score: number;
 
 	constructor(config: IPlayerProps) {
-		this.key = 'player';
+		this.key = config.key;
 		this.score = 0;
 	}
+
+	public addScore = (): number => this.score ++;
 }

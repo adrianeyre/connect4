@@ -2,7 +2,7 @@ import IPlayer from './player';
 import ISprite from './sprite';
 
 export default interface IGame {
-	player: IPlayer[];
+	players: IPlayer[];
 	sprites?: ISprite[];
 	counterCount: number
 	playerOn: boolean;

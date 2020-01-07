@@ -17,7 +17,7 @@ export default class InfoBoard extends React.Component<IInfoBoardProps, {}> {
 			</div>
 
 			<div className="info-board-instructions">
-				<p></p>
+				<p>To win Connect Four you must be the first player to get four of your colored checkers in a row either horizontally, vertically or diagonally.</p>
 			</div>
 
 			<div className="button-area">
