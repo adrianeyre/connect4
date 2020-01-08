@@ -21,5 +21,8 @@ $ npm start
 ## <a name="Shots">Screen Shots</a>
 [![Screenshot](https://raw.githubusercontent.com/adrianeyre/connect4/master/src/images/screenshot1.png)](https://raw.githubusercontent.com/adrianeyre/connect4/master/src/images/screenshot1.png "Game View")
 
+## <a name="Shots">Screen Shots</a>
+[![Screenshot](https://raw.githubusercontent.com/adrianeyre/connect4/master/src/images/screenshot2.png)](https://raw.githubusercontent.com/adrianeyre/connect4/master/src/images/screenshot2.png "Game View")
+
 ## <a name="Play">Play Connect 4</a>
 * [Connect 4](http://adrianeyre.co.uk/connect4)
