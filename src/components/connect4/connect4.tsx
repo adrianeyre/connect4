@@ -20,6 +20,7 @@ export default class Connect4 extends React.Component<IConnect4Props, IConnect4S
 			spriteHeight: 0,
 			containerWidth: 800,
 			containerHeight: 800,
+			containerMargin: 0,
 			boardWidth: 0,
 			boardHeight: 0,
 			game: new Game(this.props),
@@ -51,6 +52,7 @@ export default class Connect4 extends React.Component<IConnect4Props, IConnect4S
 
 	private styleContainer = () => ({
 		maxWidth: `${ this.state.containerHeight }px`,
+		marginLeft: `${ this.state.containerMargin }px`
 	})
 
 	private styleStatusTop = () => ({
@@ -74,10 +76,11 @@ export default class Connect4 extends React.Component<IConnect4Props, IConnect4S
 	private updatePlayerArea = (): void => {
 		const containerHeight = this.container && this.container.getBoundingClientRect().height;
 		let containerWidth = this.container && this.container.getBoundingClientRect().width;
+		const containerMargin = (window.innerWidth - containerHeight) / 2;
 		if (containerWidth > containerHeight) containerWidth = containerHeight;
 		const spriteWidth = containerWidth / this.state.game.boardWidth;
 		const spriteHeight = ((containerWidth / 100) * 85 ) / this.state.game.boardHeight;
-		this.setState(() => ({ spriteWidth, spriteHeight, containerWidth, containerHeight }))
+		this.setState(() => ({ spriteWidth, spriteHeight, containerWidth, containerHeight, containerMargin }))
 	}
 
 	private handleClick = async (x: number) => {
