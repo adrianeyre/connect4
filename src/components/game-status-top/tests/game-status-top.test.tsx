@@ -7,8 +7,9 @@ import IGameStatusTopProps from '../interfaces/game-status-top-props';
 describe('Game Status Top', () => {
 	it('Should render correctly', () => {
 		const defaultProps: IGameStatusTopProps = {
-			score: 1000,
-			hiScore: 9999,
+			player1Score: 100,
+			player2Score: 100,
+			playerOn: true,
 		};
 
 		const gameStatus = shallow(<GameStatusTop {...defaultProps} />);

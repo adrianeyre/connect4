@@ -7,8 +7,7 @@ import IInfoBoardProps from '../interfaces/info-board-props';
 describe('Info Board', () => {
 	it('Should render correctly', () => {
 		const defaultProps: IInfoBoardProps = {
-			gameOver: true,
-			score: 1000,
+			containerHeight: 100,
 			startGame: jest.fn(),
 		};
 

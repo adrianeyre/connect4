@@ -6,7 +6,13 @@ import 'react-app-polyfill/stable';
 import Connect4 from './components/connect4/connect4';
 
 import './index.scss';
-import * as serviceWorker from './serviceWorker';
+import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(<Connect4 />, document.getElementById('root'));
-serviceWorker.unregister();
+ReactDOM.render(
+    <React.StrictMode>
+        <Connect4 />
+    </React.StrictMode>,
+    document.getElementById('root')
+);
+
+reportWebVitals();
