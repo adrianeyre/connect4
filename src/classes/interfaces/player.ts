@@ -1,5 +1,5 @@
 export default interface IPlayer {
-	key: string;
-	score: number;
-	addScore(): number;
+  key: string;
+  score: number;
+  addScore(): number;
 }

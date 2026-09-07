@@ -10,83 +10,116 @@ import InfoBoard from '../info-board/info-board';
 import './styles/connect4.scss';
 
 export default class Connect4 extends React.Component<IConnect4Props, IConnect4State> {
-	private container: any;
+  private container: HTMLDivElement | null = null;
 
-	constructor(props: IConnect4Props) {
-		super(props);
+  constructor(props: IConnect4Props) {
+    super(props);
 
-		this.state = {
-			spriteWidth: 0,
-			spriteHeight: 0,
-			containerWidth: 800,
-			containerHeight: 800,
-			containerMargin: 0,
-			boardWidth: 0,
-			boardHeight: 0,
-			game: new Game(this.props),
-		}
+    this.state = {
+      spriteWidth: 0,
+      spriteHeight: 0,
+      containerWidth: 800,
+      containerHeight: 800,
+      containerMargin: 0,
+      boardWidth: 0,
+      boardHeight: 0,
+      game: new Game(this.props),
+    };
 
-		this.styleContainer = this.styleContainer.bind(this);
-	}
+    this.styleContainer = this.styleContainer.bind(this);
+  }
 
-	public async componentDidMount() {
-		this.updatePlayerArea();
-		window.addEventListener('resize', this.updatePlayerArea);
-	}
+  public componentDidMount() {
+    this.updatePlayerArea();
+    window.addEventListener('resize', this.updatePlayerArea);
+  }
 
-	public async componentWillUnmount() {
-		window.removeEventListener('resize', this.updatePlayerArea);
-	}
+  public componentWillUnmount() {
+    window.removeEventListener('resize', this.updatePlayerArea);
+  }
 
-	public render() {
-		return <div className="connect4-play-container" ref={(d) => { this.container = d }} style={ this.styleContainer() }>
-			<div style={ this.styleStatusTop() }><GameStatusTop player1Score={ this.state.game.players[0].score } player2Score={ this.state.game.players[1].score } playerOn={ this.state.game.playerOn }/></div>
+  public render() {
+    return (
+      <div
+        className="connect4-play-container"
+        ref={(d) => {
+          this.container = d;
+        }}
+        style={this.styleContainer()}
+      >
+        <div style={this.styleStatusTop()}>
+          <GameStatusTop
+            player1Score={this.state.game.players[0].score}
+            player2Score={this.state.game.players[1].score}
+            playerOn={this.state.game.playerOn}
+          />
+        </div>
 
-			{ !this.state.game.isGameInPlay && <InfoBoard startGame={ this.startGame } containerHeight={ this.state.containerHeight } /> }
+        {!this.state.game.isGameInPlay && (
+          <InfoBoard startGame={this.startGame} containerHeight={this.state.containerHeight} />
+        )}
 
-			{ this.state.game.isGameInPlay && <div className="play-area">
-				{ this.state.game.sprites?.map((sprite: ISprite) => <DrawSprite key={ sprite.key } handleClick={ this.handleClick } sprite={ sprite } height={ this.state.spriteHeight } width={ this.state.spriteWidth } containerWidth={ this.state.containerWidth } />) }
-			</div> }
-		</div>
-	}
+        {this.state.game.isGameInPlay && (
+          <div className="play-area">
+            {this.state.game.sprites?.map((sprite: ISprite) => (
+              <DrawSprite
+                key={sprite.key}
+                handleClick={this.handleClick}
+                sprite={sprite}
+                height={this.state.spriteHeight}
+                width={this.state.spriteWidth}
+                containerWidth={this.state.containerWidth}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
 
-	private styleContainer = () => ({
-		maxWidth: `${ this.state.containerHeight }px`,
-		marginLeft: `${ this.state.containerMargin }px`
-	})
+  private styleContainer = (): React.CSSProperties => ({
+    maxWidth: `${this.state.containerHeight}px`,
+    marginLeft: `${this.state.containerMargin}px`,
+  });
 
-	private styleStatusTop = () => ({
-		position: 'absolute' as 'absolute',
-		width: `100%`,
-		zIndex: 9000,
-		maxWidth: `${ this.state.containerHeight }px`,
-	})
+  private styleStatusTop = (): React.CSSProperties => ({
+    position: 'absolute',
+    width: '100%',
+    zIndex: 9000,
+    maxWidth: `${this.state.containerHeight}px`,
+  });
 
-	private startGame = async (): Promise<void> => {
-		const game = new Game(this.props);
-		game.isGameInPlay = true;
+  private startGame = (): void => {
+    const game = new Game(this.props);
+    game.isGameInPlay = true;
 
-		const boardWidth = this.state.game.boardWidth;
-		const boardHeight = this.state.game.boardHeight;
-		
-		await this.setState(() => ({ game, boardWidth, boardHeight }));
-		this.updatePlayerArea();
-	}
+    const boardWidth = this.state.game.boardWidth;
+    const boardHeight = this.state.game.boardHeight;
 
-	private updatePlayerArea = (): void => {
-		const containerHeight = this.container && this.container.getBoundingClientRect().height;
-		let containerWidth = this.container && this.container.getBoundingClientRect().width;
-		const containerMargin = (window.innerWidth - containerHeight) / 2;
-		if (containerWidth > containerHeight) containerWidth = containerHeight;
-		const spriteWidth = containerWidth / this.state.game.boardWidth;
-		const spriteHeight = ((containerWidth / 100) * 85 ) / this.state.game.boardHeight;
-		this.setState(() => ({ spriteWidth, spriteHeight, containerWidth, containerHeight, containerMargin }))
-	}
+    this.setState(() => ({ game, boardWidth, boardHeight }), this.updatePlayerArea);
+  };
 
-	private handleClick = async (x: number) => {
-		const game = this.state.game;
-		game.handleInput(x);
+  private updatePlayerArea = (): void => {
+    const containerHeight = this.container ? this.container.getBoundingClientRect().height : 0;
+    let containerWidth = this.container ? this.container.getBoundingClientRect().width : 0;
+    const containerMargin = (window.innerWidth - containerHeight) / 2;
+    if (containerWidth > containerHeight) containerWidth = containerHeight;
+    const spriteWidth = containerWidth / this.state.game.boardWidth;
+    const spriteHeight = ((containerWidth / 100) * 85) / this.state.game.boardHeight;
 
-		await this.setState(() => ({ game }));
-	}
+    this.setState(() => ({
+      spriteWidth,
+      spriteHeight,
+      containerWidth,
+      containerHeight,
+      containerMargin,
+    }));
+  };
+
+  private handleClick = (x: number): void => {
+    const game = this.state.game;
+    game.handleInput(x);
+
+    this.setState(() => ({ game }));
+  };
 }

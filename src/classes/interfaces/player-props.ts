@@ -1,3 +1,3 @@
 export default interface IPlayerProps {
-	key: string;
+  key: string;
 }
