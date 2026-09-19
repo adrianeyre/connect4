@@ -1,6 +1,6 @@
 {
   "name": "connect4",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Connect 4 — a browser Connect Four game written in TypeScript and React",
   "keywords": [
