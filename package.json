@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/adrianeyre/connect4/issues"
   },
-  "homepage": "https://adrianeyre.github.io/connect4/",
+  "homepage": "https://connect4.adrianeyre.co.uk/",
   "type": "module",
   "engines": {
     "node": ">=26"

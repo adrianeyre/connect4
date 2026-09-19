@@ -47,7 +47,7 @@ $ npm start
 
 ## <a name="Play">Play Connect 4</a>
 
-- [Connect 4](https://adrianeyre.github.io/connect4/)
+- [Connect 4](https://connect4.adrianeyre.co.uk/)
 
 ## Releases
 

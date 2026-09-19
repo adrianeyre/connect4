@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Served from https://adrianeyre.github.io/connect4/, so every asset URL needs
-// the repository name in front of it. A root base would emit `/assets/...`,
-// which on Pages resolves to the user site and 404s.
+// Served from the apex of https://connect4.adrianeyre.co.uk, so asset URLs are
+// root-absolute. This was `/connect4/` while the site lived under the
+// adrianeyre.github.io user site; keeping that prefix after the custom-domain
+// cutover made every `/connect4/assets/...` request 404.
 export default defineConfig({
-  base: '/connect4/',
+  base: '/',
   plugins: [react()],
   build: {
     outDir: 'dist',
